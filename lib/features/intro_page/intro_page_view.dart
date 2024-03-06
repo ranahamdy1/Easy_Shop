@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'intro_page_cubit.dart';
-import 'intro_page_state.dart';
 
 class Intro_pagePage extends StatelessWidget {
   @override
