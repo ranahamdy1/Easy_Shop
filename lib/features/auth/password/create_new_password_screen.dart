@@ -1,5 +1,5 @@
 import 'package:easy_shop/core/cubits/password_cubit/password_cubit.dart';
-import 'package:easy_shop/features/auth/login/login_screen.dart';
+import 'package:easy_shop/features/bottom_nav_bar/home/home_screen.dart';
 import 'package:easy_shop/public/helpers/text_form_field.dart';
 import 'package:easy_shop/public/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,8 +11,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
   final passwordController = TextEditingController();
   final newPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
-  CreateNewPasswordScreen({super.key});
+  final String code;
+  CreateNewPasswordScreen({super.key, required this.code});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
       child: BlocConsumer<PasswordCubit, PasswordState>(
         listener: (context, state) {
           if (state is PasswordSuccessState) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LoginScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (state is PasswordFailedState) {
             showDialog(
               context: context,
@@ -79,10 +79,13 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          // BlocProvider.of<PasswordCubit>(context).forgetPassword(
-                          //   password: PasswordController.text,
-                          //   newPassword: newPasswordController.text,
-                          // );
+                          BlocProvider.of<PasswordCubit>(context).resetPassword(
+                            verify_code: code.toString(),
+                            new_password: passwordController.text,
+                            new_password_confirmation:
+                                newPasswordController.text,
+                          );
+                          print("code $code");
                         }
                       },
                       child: Container(

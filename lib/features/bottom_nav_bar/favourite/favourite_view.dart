@@ -1,23 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'favourite_cubit.dart';
-import 'favourite_state.dart';
+class FavouriteScreen extends StatelessWidget {
+  const FavouriteScreen({Key? key}) : super(key: key);
 
-class FavouritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => FavouriteCubit(),
-      child: Builder(builder: (context) => _buildPage(context)),
+    return Scaffold(
+
     );
   }
-
-  Widget _buildPage(BuildContext context) {
-    final cubit = BlocProvider.of<FavouriteCubit>(context);
-
-    return Container();
-  }
 }
-
-

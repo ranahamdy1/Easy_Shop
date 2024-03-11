@@ -10,20 +10,22 @@ import 'package:flutter_svg/svg.dart';
 import 'create_new_password_screen.dart';
 
 class EmailVerifyScreen extends StatelessWidget {
-  final emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
-  EmailVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String? otpCode;
+
     return BlocProvider(
       create: (context) => PasswordCubit(),
       child: BlocConsumer<PasswordCubit, PasswordState>(
         listener: (context, state) {
           if (state is PasswordSuccessState) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateNewPasswordScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        CreateNewPasswordScreen(code: otpCode!)));
           } else if (state is PasswordFailedState) {
             showDialog(
               context: context,
@@ -53,15 +55,48 @@ class EmailVerifyScreen extends StatelessWidget {
                       "Login",
                       style: TextStyle(fontSize: 22, color: colorPrimary),
                     ),
-
-                    buildPinCodeFields(context),
-
+                    Container(
+                      child: PinCodeTextField(
+                        appContext: context,
+                        autoFocus: true,
+                        cursorColor: Colors.black,
+                        length: 6,
+                        obscureText: false,
+                        animationType: AnimationType.fade,
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(5),
+                          fieldHeight: 50,
+                          fieldWidth: 40,
+                          activeFillColor: Colors.white,
+                          borderWidth: 1,
+                          activeColor: colorPrimary,
+                          inactiveColor: colorPrimary,
+                          selectedColor: Colors.cyan,
+                          selectedFillColor: colorPrimary,
+                          inactiveFillColor: Colors.white,
+                        ),
+                        animationDuration: Duration(milliseconds: 300),
+                        backgroundColor: Colors.white,
+                        enableActiveFill: true,
+                        //errorAnimationController: errorController,
+                        //controller: textEditingController,
+                        onCompleted: (code) {
+                          otpCode = code;
+                          print("Completed");
+                          print("code $code");
+                        },
+                        onChanged: (value) {
+                          print("value $value");
+                        },
+                      ),
+                    ),
                     InkWell(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           BlocProvider.of<PasswordCubit>(context)
-                              .forgetPassword(
-                            email: emailController.text,
+                              .checkForgetPassword(
+                            verify_code: otpCode.toString(),
                           );
                         }
                       },
@@ -91,40 +126,43 @@ class EmailVerifyScreen extends StatelessWidget {
   }
 }
 
-Widget buildPinCodeFields(BuildContext context) {
-  return Container(
-    child: PinCodeTextField(
-      appContext: context,
-      autoFocus: true,
-      cursorColor: Colors.black,
-      length: 6,
-      obscureText: false,
-      animationType: AnimationType.fade,
-      pinTheme: PinTheme(
-        shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(5),
-        fieldHeight: 50,
-        fieldWidth: 40,
-        activeFillColor: Colors.white,
-        borderWidth: 1,
-        activeColor: colorPrimary,
-        inactiveColor: colorPrimary,
-        selectedColor: Colors.cyan,
-        selectedFillColor: colorPrimary,
-        inactiveFillColor: Colors.white,
-      ),
-      animationDuration: Duration(milliseconds: 300),
-      backgroundColor: Colors.white,
-      enableActiveFill: true,
-      //errorAnimationController: errorController,
-      //controller: textEditingController,
-      onCompleted: (code) {
-        //otpCode = code;
-        print("Completed");
-      },
-      onChanged: (value) {
-        print(value);
-      },
-    ),
-  );
-}
+// Widget buildPinCodeFields(BuildContext context) {
+//   String? otpCode;
+//
+//   return Container(
+//     child: PinCodeTextField(
+//       appContext: context,
+//       autoFocus: true,
+//       cursorColor: Colors.black,
+//       length: 6,
+//       obscureText: false,
+//       animationType: AnimationType.fade,
+//       pinTheme: PinTheme(
+//         shape: PinCodeFieldShape.box,
+//         borderRadius: BorderRadius.circular(5),
+//         fieldHeight: 50,
+//         fieldWidth: 40,
+//         activeFillColor: Colors.white,
+//         borderWidth: 1,
+//         activeColor: colorPrimary,
+//         inactiveColor: colorPrimary,
+//         selectedColor: Colors.cyan,
+//         selectedFillColor: colorPrimary,
+//         inactiveFillColor: Colors.white,
+//       ),
+//       animationDuration: Duration(milliseconds: 300),
+//       backgroundColor: Colors.white,
+//       enableActiveFill: true,
+//       //errorAnimationController: errorController,
+//       //controller: textEditingController,
+//       onCompleted: (code) {
+//         otpCode = code;
+//         print("Completed");
+//         print("code $code");
+//       },
+//       onChanged: (value) {
+//         print("value $value");
+//       },
+//     ),
+//   );
+// }
