@@ -110,10 +110,10 @@ class RegisterScreen extends StatelessWidget {
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               BlocProvider.of<RegisterCubit>(context).register(
-                                password: passwordController.text,
-                                email: emailController.text,
                                 name: nameController.text,
-                                confirmPassword: confirmPasswordController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                password_confirmation: confirmPasswordController.text,
                               );
                             }
                           },

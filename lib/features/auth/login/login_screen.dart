@@ -1,6 +1,6 @@
 import 'package:easy_shop/core/cubits/login_cubit/login_cubit.dart';
 import 'package:easy_shop/features/auth/password/forgetPassword_screen.dart';
-import 'package:easy_shop/features/auth/register/register_screen.dart';
+import 'package:easy_shop/features/bottom_nav_bar/home/home_screen.dart';
 import 'package:easy_shop/public/helpers/text_form_field.dart';
 import 'package:easy_shop/public/styles.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ForgetPasswordScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
           } else if (state is LoginFailedState) {
             showDialog(
               context: context,
@@ -81,8 +81,8 @@ class LoginScreen extends StatelessWidget {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           BlocProvider.of<LoginCubit>(context).login(
-                            password: passwordController.text,
                             email: emailController.text,
+                            password: passwordController.text,
                           );
                         }
                       },
@@ -102,6 +102,14 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgetPasswordScreen()));
+                      },
+                      child: Text("forget password")),
                 ],
               ),
             ),

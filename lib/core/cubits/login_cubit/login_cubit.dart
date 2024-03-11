@@ -22,7 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoadingState());
     DioHelper.postData(url: Endpoints.login, data: {
       "email": email,
-      "phone": password,
+      "password": password,
     }).then((value) {
       loginModel = LoginModel.fromJson(value.data);
       print('${loginModel.message}');

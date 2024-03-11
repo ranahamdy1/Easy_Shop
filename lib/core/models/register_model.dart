@@ -1,8 +1,8 @@
 class RegisterModel {
   Data? data;
   String? message;
-  List<Null>? error;
-  bool? status;
+  List<dynamic>? error;
+  int? status;
 
   RegisterModel({this.data, this.message, this.error, this.status});
 
@@ -10,7 +10,7 @@ class RegisterModel {
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
     message = json['message'];
     if (json['error'] != null) {
-      error = <Null>[];
+      error = <dynamic>[];
       // json['error'].forEach((v) {
       //   error!.add(new Null.fromJson(v));
       // });
@@ -57,9 +57,9 @@ class User {
   int? id;
   String? name;
   String? email;
-  Null? address;
-  Null? city;
-  Null? phone;
+  String? address;
+  String? city;
+  String? phone;
   bool? emailVerified;
   String? image;
 
