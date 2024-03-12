@@ -2,6 +2,7 @@ import 'package:easy_shop/public/shared/local/shared_preferences.dart';
 import 'package:easy_shop/public/shared/remote/logic/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'features/auth/register/register_screen.dart';
+import 'features/bottom_nav_bar/home/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: RegisterScreen(),
+      home: HomeScreen(),
     );
   }
 }
