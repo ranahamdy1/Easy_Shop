@@ -1,16 +1,16 @@
-class ProductModel {
+class SearchModel {
   Data? data;
   String? message;
   List<dynamic>? error;
   int? status;
 
-  ProductModel({this.data, this.message, this.error, this.status});
+  SearchModel({this.data, this.message, this.error, this.status});
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  SearchModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
     message = json['message'];
     if (json['error'] != null) {
-      error = <dynamic>[];
+      error = <Null>[];
       // json['error'].forEach((v) {
       //   error!.add(new Null.fromJson(v));
       // });
@@ -24,9 +24,9 @@ class ProductModel {
       data['data'] = this.data!.toJson();
     }
     data['message'] = this.message;
-    if (this.error != null) {
-      //data['error'] = this.error!.map((v) => v.toJson()).toList();
-    }
+    // if (this.error != null) {
+    //   data['error'] = this.error!.map((v) => v.toJson()).toList();
+    // }
     data['status'] = this.status;
     return data;
   }
@@ -146,8 +146,8 @@ class Meta {
 class Links {
   String? first;
   String? last;
-  dynamic? prev;
-  String? next;
+  String? prev;
+  Null? next;
 
   Links({this.first, this.last, this.prev, this.next});
 

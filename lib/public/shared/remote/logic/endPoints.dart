@@ -5,4 +5,5 @@ class Endpoints{
   static String checkForgetPassword="check-forget-password";
   static String resetPassword="reset-password";
   static String products="products";
+  static String searchProducts="products-search?name=c&page=2";
 }
