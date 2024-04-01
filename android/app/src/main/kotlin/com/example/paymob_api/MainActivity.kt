@@ -1,4 +1,4 @@
-package com.example.easy_shop
+package com.example.paymob_api
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,5 @@
 import 'package:easy_shop/core/models/product_model.dart';
+import 'package:easy_shop/features/paymwnt_screen/payment_screen.dart';
 import 'package:easy_shop/public/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,17 +26,23 @@ class CustomInfoItemScreen extends StatelessWidget {
               SizedBox(height: 20),
               Text(item.description! ),
               SizedBox(height: 20),
-              Container(
-                width: 392,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: colorPrimary,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                child: Center(
-                  child: Text(
-                    "add to cart | \$ ${item.price}",
-                    style: TextStyle(color: Colors.white),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => PaymentScreen()));
+                },
+                child: Container(
+                  width: 392,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: colorPrimary,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "add to cart | \$ ${item.price}",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
