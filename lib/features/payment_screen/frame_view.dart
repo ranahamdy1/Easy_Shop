@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -16,12 +15,13 @@ class FrameView extends StatefulWidget {
 
 class _FrameViewState extends State<FrameView> {
   final Completer<WebViewController> controller =
-      Completer<WebViewController>();
+  Completer<WebViewController>();
 
   @override
   void initState() {
     super.initState();
     if (Platform.isAndroid) {
+
       WebView.platform = SurfaceAndroidWebView();
       // WebViewController.fromPlatform(PlatformWebViewControllerCreationParams());
     }

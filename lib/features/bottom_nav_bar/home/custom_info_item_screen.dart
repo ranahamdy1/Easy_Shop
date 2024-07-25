@@ -1,5 +1,5 @@
 import 'package:easy_shop/core/models/product_model.dart';
-import 'package:easy_shop/features/paymwnt_screen/payment_screen.dart';
+import 'package:easy_shop/features/payment_screen/payment_screen.dart';
 import 'package:easy_shop/public/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
